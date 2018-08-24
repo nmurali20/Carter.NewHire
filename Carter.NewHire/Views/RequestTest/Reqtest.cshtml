@@ -1,0 +1,89 @@
+﻿@model NewHireUI.Models.NewHireRequestTestViewModel
+@using Kendo.Mvc.UI;
+@{
+    ViewBag.Title = "Request Details";
+}
+
+<script type="text/javascript">
+
+    $(function() {
+
+        createEvents();
+
+        function createEvents() {
+
+            function ClearData() {
+               // $('#emptextbox').text('');
+                //$('#weekend-date-picker').val('');
+                //$('#timepicker').val('');
+                var url = '/RequestTest/Reqtest';
+                window.location.href = url;
+            }
+
+            $('#btnSubmit').on('click',
+                function() {
+                    //var url = '@Url.Action("SubmitRequest", "RequestTest")';
+                var empname = $('#emptextbox').val();
+                var datereq = $('#weekend-date-picker').val();
+                var timereq = $('#timepicker').val();
+
+                $.ajax({
+                    url: "/RequestTest/SubmitRequest",
+                    type: "POST",
+                    data: {
+                        'empName': empname,
+                        'Datereq': datereq,
+                        'Timereq': timereq
+                    },
+                    success: function(results) {
+                        if (results.Success) {
+                            alert("Request Submitted");
+                            ClearData();
+                        } else {
+                            alert("Request Not Submitted");
+                            ClearData();
+                        }
+                    },
+                    error: function(results) {
+
+                    }
+                });
+
+                });
+        }
+    });
+</script>
+
+
+<div>
+    <div id="DashBoard-div" class="demo-section k-content" style="text-align: center;">
+        <h4>Employee Name</h4>
+        @Html.Kendo().TextBox().Name("emptextbox")
+        
+    </div>
+    <div id="DashBoard-div" class="demo-section k-content" style="text-align: center;">
+        <h4>Date</h4>
+        @(Html.Kendo().DatePicker()
+                      .Name("weekend-date-picker")
+                      .DisableDates(DayOfWeek.Saturday, DayOfWeek.Sunday)
+        )
+    </div>
+    <div id="DashBoard-div" class="demo-section k-content" style="text-align: center;">
+        <h4>Time</h4>
+        @(Html.Kendo().TimePicker()
+                      .Name("timepicker")
+                      .Value("8:00 AM")
+                      .Min("8:00 AM")
+                      .Max("5:00 PM")
+        )
+    </div>
+    <div id="DashBoard-div" style="text-align: center;">
+        <input type="submit" value="Submit Data" id="btnSubmit" />
+    </div>
+
+
+</div>
+
+
+
+

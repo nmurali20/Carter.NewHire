@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewHireUI", "NewHireUI\NewHireUI.csproj", "{E135A835-1B5E-44F0-B535-6EBE53D33AE8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carter.NewHire", "Carter.NewHire\Carter.NewHire.csproj", "{E135A835-1B5E-44F0-B535-6EBE53D33AE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carter.NewHire.Service", "Carter.NewHireUI.Service\Carter.NewHire.Service.csproj", "{B9BB91AE-B0B1-4D9F-9E45-A95785B4546C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carter.NewHire.Service", "Carter.NewHire.Service\Carter.NewHire.Service.csproj", "{B9BB91AE-B0B1-4D9F-9E45-A95785B4546C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carter.NewHire.Repository", "Carter.NewHire.Repository\Carter.NewHire.Repository.csproj", "{A61E02C7-CADA-4A8A-956E-397EFEA633FE}"
 EndProject
@@ -44,6 +44,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45
 		SolutionGuid = {A70F20D3-0FD5-462E-B79B-41C0E00D9132}
 	EndGlobalSection
 EndGlobal

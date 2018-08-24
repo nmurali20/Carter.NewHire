@@ -1,0 +1,89 @@
+﻿/*** App specific styles using carter theme as base styles ***/
+
+
+.required-text {
+    font-size: 9pt;
+    font-style: italic;
+    text-align: left;
+    color: crimson;
+}
+
+.navbar{ margin-bottom: 0;}
+
+.navbar li a{ color: #428bca!important;}
+.navbar li a:hover{ color: #00ff00!important;}
+
+.navbar-nav {
+    width: 100%;
+    text-align: center;
+}
+.navbar-nav > li {
+    float: none;
+    display: inline-block;
+}
+.navbar-nav > li.navbar-right {
+    float: right !important;
+}
+
+.mlightbox {
+    display: none;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+}
+
+.mlightbox-title {
+    color: #fff;
+    font-size: medium;
+}
+
+#DashBoard-div {
+    border: none;
+    border-radius: 3px;
+    background: #555;
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 1366px;
+}
+
+    #DashBoard-div a:link, #DashBoard-div a:visited {
+        color: #DBDEE1;
+        text-decoration: none;
+    }
+
+.header {
+    text-align: center;
+}
+
+    .header h3 {
+        margin-top: -15px;
+    }
+
+.DashBoard-columns {
+    max-width: 1300px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+    .DashBoard-columns article {
+        display: inline-block;
+        margin: 10px 15px;
+        height: 150px;
+        width: 250px;
+        font-size: 13pt;
+        font-weight: bold;
+        text-transform: capitalize;
+        color: #ccc;
+        background-color: #2C83EF;
+        border: 2px solid transparent;
+        border-radius: 3px;
+        box-shadow: 0 0 0 #666, 0 1px 0 #444, 0 1px 1px rgba(0,0,0,0.7);
+        cursor: pointer;
+    }
+
+        .DashBoard-columns article:hover {
+            border: 2px solid #ccc;
+        }

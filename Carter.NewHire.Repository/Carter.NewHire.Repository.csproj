@@ -33,11 +33,14 @@
     <Reference Include="Carter.Framework.Data, Version=1.0.0.18346, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Carter.Framework.Data.1.0.0.18346\lib\net45\Carter.Framework.Data.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleInjector, Version=2.4.1.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleInjector.2.4.1\lib\net45\SimpleInjector.dll</HintPath>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleInjector.Diagnostics, Version=2.4.1.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleInjector.2.4.1\lib\net45\SimpleInjector.Diagnostics.dll</HintPath>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector, Version=4.3.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.4.3.0\lib\net45\SimpleInjector.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -49,11 +52,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Enterprise\DataMapperFactories\NewHireRequestTestDetailsDataMapper.cs" />
+    <Compile Include="Enterprise\DataMapperFactories\StatusDataMapper.cs" />
+    <Compile Include="Enterprise\NewHireRequestTestDetailsRepository.cs" />
+    <Compile Include="Enterprise\StatusRepository.cs" />
+    <Compile Include="Factories\NewHireRequestTestDetailsRepositoryFactory.cs" />
+    <Compile Include="Factories\StatusRepositoryFactory.cs" />
+    <Compile Include="Interfaces\INewHireRequestTestDetailsRepository.cs" />
+    <Compile Include="Interfaces\IStatusRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Carter.NewHire.Infrastructure\Carter.NewHire.Infrastructure.csproj">
+      <Project>{4efa1443-2c1e-4022-9000-e72759250cda}</Project>
+      <Name>Carter.NewHire.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Carter.NewHire.Model\Carter.NewHire.Model.csproj">
+      <Project>{55E28FDB-CF34-48F8-AF1D-15367E68C977}</Project>
+      <Name>Carter.NewHire.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

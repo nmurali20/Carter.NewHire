@@ -1,0 +1,23 @@
+﻿@using Kendo.Mvc.UI
+@{
+    ViewBag.Title = "NewHire HR-Portal ";
+}
+
+<script>
+    function DivClick(thisdiv) {
+        var url = $(thisdiv).find("a").attr("href");
+        window.location = url;
+    }
+</script>
+
+<div id="DashBoard-div">
+    <section class="DashBoard-columns">
+        <article onclick=" DivClick(this) ">
+            <span><i class="fa fa-fire-extinguisher fa-4x"></i></span><br />
+            <!--@Html.ActionLink("Request Drug Test", "Reqtest", "RequestTest")-->
+           <!-- @Html.ActionLink("Request Drug Test", "Home", "Safety")-->
+            @Html.ActionLink("Request Drug Test", "Home", "EmployeeForm")
+        </article>
+    </section>
+</div>
+

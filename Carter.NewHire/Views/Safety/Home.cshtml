@@ -1,0 +1,66 @@
+﻿@model NewHireUI.Models.NewHireRequestTestViewModel
+@using Kendo.Mvc.UI;
+@{
+    ViewBag.Title = "Safety Portal";
+}
+
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        
+    });
+</script>
+
+
+<div>
+    @(Html.Kendo().Grid<NewHireUI.Models.NewHireRequestTestViewModel>()
+          .Name("gdHire")
+          .Columns(columns =>
+          {
+              columns.Bound(m => m.Id).Title("Id").Visible(false);
+              columns.Bound(m => m.EmpName).Title("New Employee Name").Width(250);
+              columns.Bound(m => m.Date).Title("Request Date").Width(250);
+              columns.Bound(m => m.Time).Title("Request Time").Width(250);
+              columns.Bound(m => m.CreatedBy).Title("Requested by").Width(200);
+              columns.Bound(m => m.Department).Title("Department").Width(150);
+              columns.Bound(m => m.Emailto).Title("Email to").Width(150);
+              columns.Bound(m => m.Status).EditorTemplateName("_Status").Title("Status").Width(150);
+              columns.Command(cmd =>
+              {
+                  cmd.Edit();
+                  //cmd.Destroy();
+              });
+
+          })
+          .Editable(editable => editable.Mode(GridEditMode.InLine))
+          .HtmlAttributes(new { style = "height: 650px;" })
+          .Scrollable(scrollable =>
+          {
+              scrollable.Enabled(true);
+              scrollable.Height("90%");
+          })
+          .Pageable(pageable => pageable
+              .Refresh(true)
+              .PageSizes(true))
+          .Resizable(resize => resize.Columns(true))
+          .DataSource(dataSource => dataSource
+              .Ajax()
+              .Model(model =>
+              {
+                  model.Id(m => m.Id);
+                  model.Field(m => m.EmpName).Editable(false);
+                  model.Field(m => m.Date).Editable(false);
+                  model.Field(m => m.Time).Editable(false);
+                  model.Field(m => m.CreatedBy).Editable(false);
+                  model.Field(m => m.Department).Editable(false);
+                  model.Field(m => m.Emailto).Editable(false);
+
+              })
+              .Read(read => read.Action("DataGridRead", "Safety"))
+              .Update(update => update.Action("DataGridStatusUpdate", "Safety"))
+              //.Destroy(update => update.Action("DataGridStatusUpdate", "Safety"))
+              .PageSize(20)
+          ))
+</div>
+

@@ -1,0 +1,9 @@
+﻿@using Kendo.Mvc.UI
+@model string
+
+@Html.Kendo().DropDownListFor(m => m).OptionLabel("Select status").DataValueField("statusname").DataTextField("statusname").DataSource(ds => { ds.Read(read => read.Action("GetAllStatuses", "Safety")); }).Value(Model)
+
+
+
+
+

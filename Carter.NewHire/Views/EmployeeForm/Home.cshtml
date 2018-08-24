@@ -1,0 +1,242 @@
+﻿
+@{
+    ViewBag.Title = "New Employee Form";
+}
+
+@model NewHireUI.Models.NewHireRequestTestViewModel
+@using Kendo.Mvc.UI;
+
+<style>
+
+    </style>
+<script type="text/javascript">
+   /* $(document).ready(function () {
+        if ($("[name='engine1']").is(":checked")) {
+            alert("checked");
+        }
+    });*/
+   /*$(document).on("change","input[type='radio']", function () { 
+       alert(this.value);
+   });*/
+    $(document).ready(function () {
+
+       $('#myForm input').on('change', function() {
+           alert($('input[name=radioName]:checked', '#myForm').val());
+           var type = $('input[name=radioName]:checked', '#myForm').val();
+           if (type === "Hourly") {
+               $('#hourlytype').show();
+               $('#shift').show();
+
+               $('#shift input').on('change',
+                   function() {
+                       alert($('input[name=shift1]:checked', '#shift').val());
+                       var type1 = $('input[name=shift1]:checked', '#shift').val();
+                       if (type1 === "Yes") {
+                           $('#amt').show();
+                       } else {
+                           $('#amt').hide();
+                       }
+                   });
+              
+               $('#salarytype').hide();
+               $('#benefitsblock').hide();
+               $('#phone').hide();
+
+              /* var dropdownlist = $("#Branchnames").data("kendoDropDownList");
+               dropdownlist.wrapper.hide();
+               document.getElementById("phonelabel").style.display = 'none';*/
+           }
+           if (type === "Salary") {
+               $('#salarytype').show();
+               $('#phone').show();
+               $('#benefitsblock').show();
+               $('#hourlytype').hide();
+               $('#shift').hide();
+               $('#amt').hide();
+           }
+       });
+   });
+
+    $(function() {
+
+        createEvents();
+
+        function createEvents() {
+
+            function ClearData() {
+                var url = '/EmployeeForm/Home';
+                window.location.href = url;
+            }
+
+            $('#btnSubmit').on('click',
+                function() {
+                    //var url = '@Url.Action("SubmitRequest", "RequestTest")';
+                var empname = $('#emptextbox').val();
+                var datereq = $('#weekend-date-picker').val();
+                var timereq = $('#timepicker').val();
+
+                $.ajax({
+                    url: "/RequestTest/SubmitRequest",
+                    type: "POST",
+                    data: {
+                        'empName': empname,
+                        'Datereq': datereq,
+                        'Timereq': timereq
+                    },
+                    success: function(results) {
+                        if (results.Success) {
+                            alert("Request Submitted");
+                            ClearData();
+                        } else {
+                            alert("Request Not Submitted");
+                            ClearData();
+                        }
+                    },
+                    error: function(results) {
+
+                    }
+                });
+
+                });
+        }
+    });
+</script>
+
+
+<div>
+    <span class="red-text required-text" style="color:crimson ">*All Fields Are Required</span>
+    <div class="forms" style="text-align: -moz-left;">
+        <label id="branchlabel" for="Branchnames" class="required">Branch:</label>
+        @(Html.Kendo().DropDownList()
+                                                      .Name("Branchnames")
+                                                      .DataTextField("Description")
+                                                      .DataValueField("AbbreviationId")
+                                                      .OptionLabel("Select Branch")
+        )
+        <label for="temp" class="required">Temporary Employee:</label>
+        @(Html.Kendo().DropDownList()
+                              .Name("temp")
+                              .DataTextField("Text")
+                              .DataValueField("Value")
+                              .BindTo(new[] {
+                                                    new SelectListItem { Text="Yes" },
+                                                    new SelectListItem { Text="No" }
+                              })
+        )
+        <label for="comvalue">Commdata Access:</label>
+        <input type="radio" name="comm" value="Yes" /> Yes
+        <input type="radio" name="comm" value="No" checked="checked" /> No
+    </div>
+    <br />
+    <div class="demo-section k-content" style="text-align: center;">
+        <label for="myForm">Employee Type:</label>
+        <form id="myForm">
+            <input type="radio" name="radioName" value="Hourly" /> Hourly
+            <input type="radio" name="radioName" value="Salary" /> Salary
+        </form>
+    </div>
+    <br/>
+    <div id="salarytype" class="demo-section k-content" style="text-align: center; display: none;">
+        <label id="phonelabel" for="phone">Phone Stipend:</label>
+        <form id="phone" style="display: none;">
+            <input type="radio" name="phone1" value="Yes" /> Yes
+            <input type="radio" name="phone2" value="No" /> No
+        </form>
+        <div id="benefitsblock" style="display:none">
+            <label id="benefitslabel" for="Benefits">Description of benefits:</label>
+            @Html.TextArea("Benefits", new { @class = "k-textbox notes", @cols = 80, @rows = 4 })
+        </div>
+    </div>
+    <br />
+
+    <div id="hourlytype" class="demo-section k-content" style="text-align: center; display: none;">
+        <label id="shiftpre" for="phone">Shift Premium:</label>
+        <form id="shift" style="display:none">
+            <input type="radio" name="shift1" value="Yes" /> Yes
+            <input type="radio" name="shift1" value="No" /> No
+        </form>
+        <div id="amt" style="display:none;">
+            <label id="amountlabel" for="Benefits">Shift Premum Amount:</label>
+            @(Html.Kendo().TextBox().Name("Amount")
+                          .HtmlAttributes(new { placeholder = "Stipend amount", required = "required", style = "width:220px" })
+            )
+        </div>
+    </div>
+    <br />
+    <div class="demo-section k-content" style="text-align:-moz-center;">
+        <label id="empname" for="search" class="required">Employee Name:</label>
+        @(Html.Kendo().TextBox().Name("fullname")
+                                .HtmlAttributes(new { placeholder = "Full name", required = "required", validationmessage = "Enter fullname", style = "width:220px" })
+        )
+        <label id="position" for="jobtitle" class="required">Job Title:</label>
+        @(Html.Kendo().TextBox().Name("jobtitle")
+                      .HtmlAttributes(new { placeholder = "Position", required = "required", style = "width:220px" })
+              )
+        </div><br/>
+    <div class="demo-section k-content" style="text-align: -moz-center;">
+        <label id="effdate" for="startdate" class="required">Effective Date:</label>
+        @(Html.Kendo().DatePicker().Name("startdate").DisableDates(DayOfWeek.Saturday, DayOfWeek.Sunday)
+              )
+    </div><br/>
+    <div class="demo-section k-content" style="text-align: -moz-center;">
+            <label id="dept" for="Departmentname" class="required">Department:</label>
+            @(Html.Kendo().DropDownList()
+                                  .Name("Departmentname")
+                                  .DataTextField("Description")
+                                  .DataValueField("AbbreviationId")
+                                  .OptionLabel("Select Department"))
+        </div><br />
+        <div class="demo-section k-content" style="text-align: -moz-center;">
+            <label for="hiring" class="required">Hiring Manager:</label>
+            @(Html.Kendo().TextBox().Name("hiring")
+                                  .HtmlAttributes(new { placeholder = "Name", required = "required", style = "width:220px" })
+            )
+            <label for="direct" class="required">Direct Manager:</label>
+            @(Html.Kendo().TextBox().Name("direct")
+                                  .HtmlAttributes(new { placeholder = "Name", required = "required", style = "width:220px" })
+            )
+        </div><br />
+        <div class="demo-section k-content" style="text-align: center;">
+            <label for="email" class="required">Email:</label>
+            @(Html.Kendo().DropDownList()
+                                  .Name("email")
+                                  .DataTextField("Text")
+                                  .DataValueField("Value")
+                                  .BindTo(new[] {
+                      new SelectListItem { Text="Carter-Logistics.com" },
+                      new SelectListItem { Text="Carter-Express.com" }
+                                  })
+            )
+        </div><br /><br />
+        <div class="demo-section k-content" style="text-align: center;">
+            <label for="sign" class="required">Manager Signature:</label>
+            @(Html.Kendo().TextBox().Name("signature")
+                                  .HtmlAttributes(new { placeholder = "Sign", required = "required", style = "width:220px" })
+            )
+            <input type="submit" value="DocuSign" id="docsign" style="display: none;" />
+        </div><br />
+        <div class="demo-section k-content" style="text-align: center;">
+            <label for="todate" class="required">Dated:</label>
+            @(Html.Kendo().DatePicker().Name("todate").DisableDates(DayOfWeek.Saturday, DayOfWeek.Sunday)
+            )
+        </div>
+        <div style="text-align: center;">
+            <input type="submit" value="Submit Data" id="btnSubmit" />
+        </div>
+
+
+    </div>
+
+<style>
+    .valid {
+        color: green;
+    }
+
+    .invalid {
+        color: red;
+    }
+</style>
+
+
+
+
